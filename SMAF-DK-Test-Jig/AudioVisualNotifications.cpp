@@ -252,7 +252,7 @@ void AudioVisualNotifications::loadingVisualNotification() {
 *
 *
 */
-void AudioVisualNotifications::individualPixelControl(int pixel, int red, int green, int blue) {
+void AudioVisualNotifications::initializePixel(int pixel, int red, int green, int blue) {
   _neoPixel.setPixelColor(pixel, _neoPixel.Color(red, green, blue));
   _neoPixel.show();
 }

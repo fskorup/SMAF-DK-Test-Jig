@@ -26,30 +26,30 @@
 #include "Helpers.h"
 #include "AudioVisualNotifications.h"
 
-const int neoPixel = 4;    // ADC1-CH0
-const int buzzer = 5;      // ADC1-CH4
-const int userButton = 6;  // ADC1-CH5
-const int gpio01 = 1;      // SDA
-const int gpio02 = 2;      // SCL
-const int gpio07 = 7;      // ADC1-CH6
-const int gpio08 = 8;      // ADC1-CH7
-const int gpio09 = 9;      // ADC1-CH8
-const int gpio10 = 10;     // ADC1-CH9
-const int gpio11 = 11;     // ADC2-CH0
-const int gpio12 = 12;     // ADC2-CH1
-const int gpio13 = 13;     // ADC2-CH2
-const int gpio14 = 14;     // ADC2-CH3
-const int gpio15 = 15;     // U0RTS
-const int gpio16 = 16;     // U0CTS
-const int gpio17 = 17;     // U1TXD
-const int gpio18 = 18;     // U0RXD
+const int neoPixel = 4;    // IO04, ADC1-CH0
+const int speaker = 5;      // IO05, ADC1-CH4
+const int userButton = 6;  // IO06, ADC1-CH5
+const int gpio01 = 1;      // IO01, SDA
+const int gpio02 = 2;      // IO02, SCL
+const int gpio07 = 7;      // IO07, ADC1-CH6
+const int gpio08 = 8;      // IO08, ADC1-CH7
+const int gpio09 = 9;      // IO09, ADC1-CH8
+const int gpio10 = 10;     // IO10, ADC1-CH9
+const int gpio11 = 11;     // IO11, ADC2-CH0
+const int gpio12 = 12;     // IO12, ADC2-CH1
+const int gpio13 = 13;     // IO13, ADC2-CH2
+const int gpio14 = 14;     // IO14, ADC2-CH3
+const int gpio15 = 15;     // IO15, U0RTS, ADC2-CH4
+const int gpio16 = 16;     // IO16, U0CTS, ADC2-CH5
+const int gpio17 = 17;     // IO17, U1TXD, ADC2-CH6
+const int gpio18 = 18;     // IO18, U0RXD, ADC2-CH7
 const int gpio21 = 21;     // IO21
-const int gpio33 = 33;     // IO33
-const int gpio34 = 34;     // IO34
-const int gpio39 = 39;     // MTCK
-const int gpio40 = 40;     // MTDO
-const int gpio41 = 41;     // MTDI
-const int gpio42 = 42;     // MTMS
+const int gpio33 = 33;     // IO33, SPIIO04
+const int gpio34 = 34;     // IO34, SPIIO05
+const int gpio39 = 39;     // IO39, MTCK
+const int gpio40 = 40;     // IO40, MTDO
+const int gpio41 = 41;     // IO41, MTDI
+const int gpio42 = 42;     // IO42, MTMS
 const int gpio47 = 47;     // IO47
 const int txd = 43;        // IO43, U0TXD
 const int rxd = 44;        // IO44, U0RXD
@@ -65,14 +65,11 @@ const int rxd = 44;        // IO44, U0RXD
 * @param neoPixelBrightness The brightness level of the NeoPixels (0-255).
 * @param speakerPin The pin connected to the speaker for audio feedback.
 */
-AudioVisualNotifications notifications(neoPixel, 2, 40, buzzer);
+AudioVisualNotifications notifications(neoPixel, 2, 40, speaker);
 
 /**
-* @brief Initializes the SMAF-DK-Test-Jig and runs once at the beginning.
-*
 * This function is responsible for the initial setup of the SMAF-DK-Test-Jig.
 * It is executed once when the Arduino board starts or is reset.
-*
 */
 void setup() {
   // Initialize serial communication at a baud rate of 115200.
@@ -109,20 +106,17 @@ void setup() {
   // This does not light up neo pixels.
   notifications.initializeVisualNotifications();
   notifications.clearAllVisualNotifications();
-  notifications.individualPixelControl(0, 0, 0, 255);
-  notifications.individualPixelControl(1, 0, 255, 0);
+  notifications.initializePixel(0, 0, 0, 255);
+  notifications.initializePixel(1, 0, 255, 0);
 
   // Play intro melody on speaker if enabled in preferences.
   notifications.introAudioNotification();
 }
 
 /**
-* @brief Main execution loop for the MAF-DK-Test-Jig.
-*
 * This function runs repeatedly in a loop after the initial setup.
 * It is the core of your Arduino program, where continuous tasks and operations should be placed.
 * Be mindful of keeping the loop efficient and avoiding long blocking operations.
-*
 */
 void loop() {
   if (digitalRead(userButton) == LOW) debug(SCS, "User button detected.");

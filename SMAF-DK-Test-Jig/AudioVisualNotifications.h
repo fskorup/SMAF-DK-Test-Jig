@@ -237,7 +237,7 @@ public:
   *
   *
   */
-  void individualPixelControl(int pixel, int red, int green, int blue);
+  void initializePixel(int pixel, int red, int green, int blue);
 
 private:
   int _neoPixelPin;
