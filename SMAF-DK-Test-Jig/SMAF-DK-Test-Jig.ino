@@ -27,7 +27,7 @@
 #include "AudioVisualNotifications.h"
 
 const int neoPixel = 4;    // IO04, ADC1-CH0
-const int speaker = 5;      // IO05, ADC1-CH4
+const int speaker = 5;     // IO05, ADC1-CH4
 const int userButton = 6;  // IO06, ADC1-CH5
 const int gpio01 = 1;      // IO01, SDA
 const int gpio02 = 2;      // IO02, SCL
