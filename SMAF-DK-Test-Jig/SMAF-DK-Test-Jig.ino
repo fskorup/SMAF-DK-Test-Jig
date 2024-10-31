@@ -1,6 +1,6 @@
 /**
-* @file SMAF-DK-Test-Jig.ino
-* @brief Main Arduino sketch for the SMAF-DK-Test-Jig project.
+* SMAF-DK-Test-Jig.ino
+* Main Arduino sketch for the SMAF-DK-Test-Jig project.
 *
 * @license MIT License
 *
@@ -55,15 +55,13 @@ const int txd = 43;        // IO43, U0TXD
 const int rxd = 44;        // IO44, U0RXD
 
 /**
-* @brief Constructs an instance of the AudioVisualNotifications class.
-*
-* Initializes an instance of the AudioVisualNotifications class with the provided configurations.
-* The NeoPixel pin should be set up as OUTPUT before calling this constructor.
-*
-* @param neoPixelPin The pin connected to the NeoPixel LED strip.
-* @param neoPixelCount The number of NeoPixels in the LED strip.
+* Constructs an AudioVisualNotifications object with specified parameters.
+* Initializes the NeoPixel and speaker pin settings for audio-visual notifications.
+* 
+* @param neoPixelPin The GPIO pin connected to the NeoPixel.
+* @param neoPixelCount The number of NeoPixels in the strip.
 * @param neoPixelBrightness The brightness level of the NeoPixels (0-255).
-* @param speakerPin The pin connected to the speaker for audio feedback.
+* @param speakerPin The GPIO pin connected to the speaker.
 */
 AudioVisualNotifications notifications(neoPixel, 2, 40, speaker);
 
