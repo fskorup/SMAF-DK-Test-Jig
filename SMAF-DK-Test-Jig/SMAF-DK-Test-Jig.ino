@@ -46,6 +46,7 @@ const int gpio18 = 18;   // IO18, U0RXD, ADC2-CH7
 const int gpio21 = 21;   // IO21
 const int gpio33 = 33;   // IO33, SPIIO04
 const int gpio34 = 34;   // IO34, SPIIO05
+const int gpio38 = 38;   // IO38, FSPIWP
 const int gpio39 = 39;   // IO39, MTCK
 const int gpio40 = 40;   // IO40, MTDO
 const int gpio41 = 41;   // IO41, MTDI
@@ -92,6 +93,7 @@ void setup() {
   pinMode(gpio21, INPUT);
   pinMode(gpio33, INPUT);
   pinMode(gpio34, INPUT);
+  pinMode(gpio38, INPUT);
   pinMode(gpio39, INPUT);
   pinMode(gpio40, INPUT);
   pinMode(gpio41, INPUT);
@@ -208,6 +210,11 @@ void loop() {
   // IO34, SPIIO05
   if (digitalRead(gpio34) == HIGH) {
     debug(SCS, "GPIO-34 detected.");
+  }
+
+  // IO38, FSPIWP
+  if (digitalRead(gpio38) == HIGH) {
+    debug(SCS, "GPIO-38 detected.");
   }
 
   // IO39, MTCK
